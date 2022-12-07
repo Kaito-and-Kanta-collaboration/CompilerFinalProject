@@ -2,9 +2,10 @@ from lex import *
 from emit import *
 from parse import *
 import sys
+import os
 
 def main():
-    print("Teeny Tiny Compiler")
+    print("Samurai Compiler")
 
     if len(sys.argv) != 2:
         sys.exit("Error: Compiler needs source file as argument.")
@@ -19,5 +20,7 @@ def main():
     parser.program() # Start the parser.
     emitter.writeFile() # Write the output to file.
     print("Compiling completed.")
+    os.system('gcc -o out out.c')
+    os.system('./out')
 
 main()
