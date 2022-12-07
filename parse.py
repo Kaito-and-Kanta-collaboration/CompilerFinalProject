@@ -74,7 +74,7 @@ class Parser:
         # Check the first token to see what kind of statement this is.
 
         # "PRINT" (expression | string)
-        if self.checkToken(TokenType.PRINT):
+        if self.checkToken(TokenType.DISPLAY):
             self.nextToken()
 
             if self.checkToken(TokenType.STRING):
@@ -142,7 +142,7 @@ class Parser:
             self.match(TokenType.IDENT)
 
         # "LET" ident = expression
-        elif self.checkToken(TokenType.LET):
+        elif self.checkToken(TokenType.VAR):
             self.nextToken()
 
             #  Check if ident exists in symbol table. If not, declare it.
@@ -158,7 +158,7 @@ class Parser:
             self.emitter.emitLine(";")
 
         # "INPUT" ident
-        elif self.checkToken(TokenType.INPUT):
+        elif self.checkToken(TokenType.GET):
             self.nextToken()
 
             # If variable doesn't already exist, declare it.

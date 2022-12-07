@@ -1,0 +1,15 @@
+# create variables to store numbers
+VAR a = 1
+VAR b = 4
+
+# add a and b and store the result into new variable c
+VAR c = a + b
+
+# print 5 on terminal
+DISPLAY c 
+
+# multiply and store the result into new variable d
+VAR d = c * b
+
+# print 20 on terminal
+DISPLAY d

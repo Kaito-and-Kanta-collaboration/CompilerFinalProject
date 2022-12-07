@@ -19,7 +19,6 @@ def main():
 
     parser.program() # Start the parser.
     emitter.writeFile() # Write the output to file.
-    print("Compiling completed.")
     os.system('gcc -o out out.c')
     os.system('./out')
 

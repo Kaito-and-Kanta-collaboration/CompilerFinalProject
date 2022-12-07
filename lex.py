@@ -2,7 +2,7 @@ import sys
 import enum
 
 # Lexer object keeps track of current position in the source code and produces each token.
-class Lexer:
+class Lexer: 
     def __init__(self, input):
         self.source = input + '\n' # Source code to lex as a string. Append a newline to simplify lexing/parsing the last token/statement.
         self.curChar = ''   # Current character in the string.
@@ -171,9 +171,9 @@ class TokenType(enum.Enum):
     # Keywords.
     LABEL = 101
     GOTO = 102
-    PRINT = 103
-    INPUT = 104
-    LET = 105
+    DISPLAY = 103
+    GET = 104
+    VAR = 105
     IF = 106
     THEN = 107
     ENDIF = 108
