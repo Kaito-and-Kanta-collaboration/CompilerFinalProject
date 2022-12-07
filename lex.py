@@ -1,24 +1,19 @@
 import sys
 import enum
 
-
-
+# Lexer object keeps track of current position in the source code and produces each token.
 class Lexer:
     def __init__(self, input):
-        # Source code to lex as a string. Append a newline to simplify lexing/parsing the last token/statement.
-        self.source = input + '\n'
-        # Current character in the string.
-        self.curChar = ''
-        # Current character in the string.
-        self.curPos = -1
+        self.source = input + '\n' # Source code to lex as a string. Append a newline to simplify lexing/parsing the last token/statement.
+        self.curChar = ''   # Current character in the string.
+        self.curPos = -1    # Current position in the string.
         self.nextChar()
 
     # Process the next character.
     def nextChar(self):
         self.curPos += 1
         if self.curPos >= len(self.source):
-            # EOF
-            self.curChar = '\0'
+            self.curChar = '\0'  # EOF
         else:
             self.curChar = self.source[self.curPos]
 
@@ -32,17 +27,6 @@ class Lexer:
     def abort(self, message):
         sys.exit("Lexing error. " + message)
 
-    # Skip whitespace except newlines, which we will use to indicate the end of a statement.
-    def skipWhitespace(self):
-        while self.curChar == ' ' or self.curChar == '\t' or self.curChar == '\r':
-            self.nextChar()
-
-    # Skip comments in the code.
-    def skipComment(self):
-        if self.curChar == '#':
-            while self.curChar != '\n':
-                self.nextChar()
-
     # Return the next token.
     def getToken(self):
         self.skipWhitespace()
@@ -50,7 +34,7 @@ class Lexer:
         token = None
 
         # Check the first character of this token to see if we can decide what it is.
-        # If it is a multiple character operator (e.g., !=), number, identifier, or keyword then we will process the rest.
+        # If it is a multiple character operator (e.g., !=), number, identifier, or keyword, then we will process the rest.
         if self.curChar == '+':
             token = Token(self.curChar, TokenType.PLUS)
         elif self.curChar == '-':
@@ -59,10 +43,6 @@ class Lexer:
             token = Token(self.curChar, TokenType.ASTERISK)
         elif self.curChar == '/':
             token = Token(self.curChar, TokenType.SLASH)
-        elif self.curChar == '\n':
-            token = Token(self.curChar, TokenType.NEWLINE)
-        elif self.curChar == '\0':
-            token = Token('', TokenType.EOF)
         elif self.curChar == '=':
             # Check whether this token is = or ==
             if self.peek() == '=':
@@ -94,6 +74,7 @@ class Lexer:
                 token = Token(lastChar + self.curChar, TokenType.NOTEQ)
             else:
                 self.abort("Expected !=, got !" + self.peek())
+
         elif self.curChar == '\"':
             # Get characters between quotations.
             self.nextChar()
@@ -108,6 +89,7 @@ class Lexer:
 
             tokText = self.source[startPos : self.curPos] # Get the substring.
             token = Token(tokText, TokenType.STRING)
+
         elif self.curChar.isdigit():
             # Leading character is a digit, so this must be a number.
             # Get all consecutive digits and decimal if there is one.
@@ -118,7 +100,7 @@ class Lexer:
                 self.nextChar()
 
                 # Must have at least one digit after decimal.
-                if not self.peek().isdigit():
+                if not self.peek().isdigit(): 
                     # Error!
                     self.abort("Illegal character in number.")
                 while self.peek().isdigit():
@@ -140,6 +122,12 @@ class Lexer:
                 token = Token(tokText, TokenType.IDENT)
             else:   # Keyword
                 token = Token(tokText, keyword)
+        elif self.curChar == '\n':
+            # Newline.
+            token = Token('\n', TokenType.NEWLINE)
+        elif self.curChar == '\0':
+             # EOF.
+            token = Token('', TokenType.EOF)
         else:
             # Unknown token!
             self.abort("Unknown token: " + self.curChar)
@@ -147,9 +135,19 @@ class Lexer:
         self.nextChar()
         return token
 
+    # Skip whitespace except newlines, which we will use to indicate the end of a statement.
+    def skipWhitespace(self):
+        while self.curChar == ' ' or self.curChar == '\t' or self.curChar == '\r':
+            self.nextChar()
+
+    def skipComment(self):
+        if self.curChar == '#':
+            while self.curChar != '\n':
+                self.nextChar()
+
 
 # Token contains the original text and the type of token.
-class Token:
+class Token:   
     def __init__(self, tokenText, tokenKind):
         self.text = tokenText   # The token's actual text. Used for identifiers, strings, and numbers.
         self.kind = tokenKind   # The TokenType that this token is classified as.
@@ -165,32 +163,32 @@ class Token:
 
 # TokenType is our enum for all the types of tokens.
 class TokenType(enum.Enum):
-	EOF = -1
-	NEWLINE = 0
-	NUMBER = 1
-	IDENT = 2
-	STRING = 3
-	# Keywords.
-	LABEL = 101
-	GOTO = 102
-	PRINT = 103
-	INPUT = 104
-	LET = 105
-	IF = 106
-	THEN = 107
-	ENDIF = 108
-	WHILE = 109
-	REPEAT = 110
-	ENDWHILE = 111
-	# Operators.
-	EQ = 201
-	PLUS = 202
-	MINUS = 203
-	ASTERISK = 204
-	SLASH = 205
-	EQEQ = 206
-	NOTEQ = 207
-	LT = 208
-	LTEQ = 209
-	GT = 210
-	GTEQ = 211
+    EOF = -1
+    NEWLINE = 0
+    NUMBER = 1
+    IDENT = 2
+    STRING = 3
+    # Keywords.
+    LABEL = 101
+    GOTO = 102
+    PRINT = 103
+    INPUT = 104
+    LET = 105
+    IF = 106
+    THEN = 107
+    ENDIF = 108
+    WHILE = 109
+    REPEAT = 110
+    ENDWHILE = 111
+    # Operators.
+    EQ = 201  
+    PLUS = 202
+    MINUS = 203
+    ASTERISK = 204
+    SLASH = 205
+    EQEQ = 206
+    NOTEQ = 207
+    LT = 208
+    LTEQ = 209
+    GT = 210
+    GTEQ = 211
