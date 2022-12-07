@@ -14,7 +14,7 @@ IF c < d THEN
     DISPLAY "c is smaller than d"
 ENDIF
 
-# create loop statements(while)
+# create while loop statements
 
 VAR e = 0
 VAR f = 1
