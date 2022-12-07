@@ -2,18 +2,28 @@
 VAR a = 1
 VAR b = 4
 
-# add a and b and store the result into new variable c
-VAR c = a + b
 
-# print 5 on terminal
-DISPLAY c 
+IF a < b THEN
+    DISPLAY "a is smaller than b"
+ENDIF
 
-# multiply and store the result into new variable d
-VAR d = c * b
+VAR c = 5
+VAR d = 4
 
-# print 20 on terminal
-DISPLAY d
+IF c < d THEN
+    DISPLAY "c is smaller than d"
+ENDIF
 
-# get a number and print absolute value of it
-GET number
-ABS number
+# create loop statements(while)
+
+VAR e = 0
+VAR f = 1
+
+# do while loop 4 times
+
+WHILE e < 5 REPEAT
+    DISPLAY "do while loop"
+    VAR e = f
+    VAR g = f + e
+    VAR f = g
+ENDWHILE

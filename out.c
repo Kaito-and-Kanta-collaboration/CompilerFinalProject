@@ -5,17 +5,26 @@ float a;
 float b;
 float c;
 float d;
-float number;
+float e;
+float f;
+float g;
 a = 1;
 b = 4;
-c = a+b;
-printf("%.2f\n", (float)(c));
-d = c*b;
-printf("%.2f\n", (float)(d));
-if(0 == scanf("%f", &number)) {
-number = 0;
-scanf("%*s");
+if(a<b){
+printf("a is smaller than b\n");
 }
-printf("%f", fabsf(number));
+c = 5;
+d = 4;
+if(c<d){
+printf("c is smaller than d\n");
+}
+e = 0;
+f = 1;
+while(e<5){
+printf("do while loop\n");
+e = f;
+g = f+e;
+f = g;
+}
 return 0;
 }
