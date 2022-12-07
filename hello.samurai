@@ -27,3 +27,10 @@ WHILE e < 5 REPEAT
     VAR f = g
     DISPLAY e
 ENDWHILE
+
+# get a data from input and return absolute number.
+GET positiveNumber
+ABS positiveNumber
+DISPLAY ""
+GET negativeNumber
+ABS negativeNumber
