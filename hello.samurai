@@ -19,11 +19,11 @@ ENDIF
 VAR e = 0
 VAR f = 1
 
-# do while loop 4 times
+# do while loop 5 times
 
 WHILE e < 5 REPEAT
-    DISPLAY "do while loop"
     VAR e = f
-    VAR g = f + e
+    VAR g = f + 1
     VAR f = g
+    DISPLAY e
 ENDWHILE

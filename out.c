@@ -21,10 +21,10 @@ printf("c is smaller than d\n");
 e = 0;
 f = 1;
 while(e<5){
-printf("do while loop\n");
 e = f;
-g = f+e;
+g = f+1;
 f = g;
+printf("%.2f\n", (float)(e));
 }
 return 0;
 }
