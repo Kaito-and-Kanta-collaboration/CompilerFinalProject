@@ -173,7 +173,11 @@ class Parser:
             self.emitter.emitLine("*s\");")
             self.emitter.emitLine("}")
             self.match(TokenType.IDENT)
-
+        # "ABS" ident
+        elif self.checkToken(TokenType.ABS):
+            self.nextToken()
+            self.emitter.emitLine("printf(\"%f\", fabsf(" + self.curToken.text + "));")
+            self.nextToken()
         # This is not a valid statement. Error!
         else:
             self.abort("Invalid statement at " + self.curToken.text + " (" + self.curToken.kind.name + ")")

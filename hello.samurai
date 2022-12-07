@@ -13,3 +13,7 @@ VAR d = c * b
 
 # print 20 on terminal
 DISPLAY d
+
+# get a number and print absolute value of it
+GET number
+ABS number
